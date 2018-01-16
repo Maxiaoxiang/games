@@ -1,2 +1,1 @@
-# games
-some games
+1. [打砖块](http://maxiaoxiang.com/games/block/index.html)
