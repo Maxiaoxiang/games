@@ -99,10 +99,6 @@
         _.start = function () {
             loop();
         };
-        //游戏结束
-        _.over = function () {
-            console.log('game over');
-        };
     };
 
     //球
@@ -235,6 +231,12 @@
         game.registerAction('32', function () {
             ball.fire();
         });
+        game.registerAction('80', function () {
+            game.paused = true;
+        });
+        game.registerAction('79', function () {
+            game.paused = false;
+        });
         game.draw = function () {
             ball.draw();
             player.draw();
@@ -249,9 +251,12 @@
             game.ctx.fillText('第' + game.level + '关', 350, 20);
         };
         game.update = function () {
+            if (game.paused) {
+                return;
+            }
             ball.move();
             if (ball.y > player.y) { //游戏结束
-                game.over();
+                console.log('game over');
             }
             if (detectCollision(player, ball)) { //碰挡板
                 ball.rebound(); //反弹
